@@ -154,39 +154,9 @@ def showLadderResult(n,l,pts):
         print("@%03d %03.0f/%05.1f %7.2f %7.2f %8.4f %9.4f %03.0f/%05.1f" % \
               (i, p["hdg"],p["dst"],p["n"],p["e"],p["lat"],p["lon"],p["brg"],p["rng"]))
 
-    print()
-    print()
-    print(minN,0.0)
-    print(maxN,0.0)
-    print()
-    print(0.0,minE)
-    print(0.0,maxE)
-    print()
-    print()
-
-    if int(60*(maxLon-minLon)/4):
-        for h in range(int(60*(minLon-pts[0]["lon"])),int(60*(maxLon-pts[0]["lon"])),int(60*(maxLon-minLon)/4)):
-            print(minN,h*cos(radians(pts[0]["lat"]+minN/60.0)))
-            print(maxN,h*cos(radians(pts[0]["lat"]+maxN/60.0)))
-            print()
-    else:
-        print(minN,0.0)
-        print(maxN,0.0)
-        print()
-
-    if int(60*(maxLat-minLat)/4)>0:
-        for v in range(int(60*(minLat-pts[0]["lat"])),int(60*(maxLat-pts[0]["lat"])),int(60*(maxLat-minLat)/4)):
-            print(v,minE)
-            print(v,maxE)
-            print()
-        else:
-            print(0.0,minE)
-            print(0.0,maxE)
-            print()
-    
 
     # Epilogue
-    print("#LADDER has %d areas with %d legs and a planned travel distance of %.1f." % (n,2*n-1,l))
+    print("#LADDER has %d areas with %d legs and a planned travel distance of %.1f NM." % (n,2*n-1,l))
 
     if n>25:
         print("#LADDER is restricted in the operational code (areas=%d,legs=%d,coverage=%.1f%%)." % (25,2*25-1,2500.0/n))
@@ -259,29 +229,11 @@ def showSquareResult(n,l,pts):
         print("@%03d %03.0f/%05.1f %7.2f %7.2f %8.4f %9.4f %03.0f/%05.1f" % \
               (i, p["hdg"],p["dst"],p["n"],p["e"],p["lat"],p["lon"],p["brg"],p["rng"]))
 
-    print()
-    print()
-    print(minN,0.0)
-    print(maxN,0.0)
-    print()
-    print(0.0,minE)
-    print(0.0,maxE)
-    print()
-    print()
-    for h in range(int(60*(minLon-pts[0]["lon"])),int(60*(maxLon-pts[0]["lon"])),int(60*(maxLon-minLon)/4)):
-        print(minN,h*cos(radians(pts[0]["lat"]+minN/60.0)))
-        print(maxN,h*cos(radians(pts[0]["lat"]+maxN/60.0)))
-        print()
-    for v in range(int(60*(minLat-pts[0]["lat"])),int(60*(maxLat-pts[0]["lat"])),int(60*(maxLat-minLat)/4)):
-        print(v,minE)
-        print(v,maxE)
-        print()
-
     # Epilogue
     if n<2:
         print("#SQUARE is not implementable (n=%d)" % (n))
     else:
-        print("#SQUARE has %d areas with %d legs and a planned travel distance of %.1f." % (n,2*n-1,l))
+        print("#SQUARE has %d areas with %d legs and a planned travel distance of %.1f NM." % (n,2*n-1,l))
     if n>24:
         print("#SQUARE is restricted in the operational code (areas=%d,legs=%d,coverage=%.1f%%)." % (24,2*24-1,2400.0/n))
 
@@ -313,7 +265,7 @@ def calcSector(orient,angle,radius,firstToRight,lat,lon):
         addOrigin(pts,lat,lon)
         # Approach to first corner point
         addPoint(pts,course,r)
-        for i in range(np/2):
+        for i in range(int(np/2)):
             course=turnByAngle(course,offset)
             addPoint(pts,course,s)
             course=turnByAngle(course,offset)
@@ -346,29 +298,11 @@ def showSectorResult(n,l,pts):
         print("@%03d %03.0f/%05.1f %7.2f %7.2f %8.4f %9.4f %03.0f/%05.1f" % \
               (i, p["hdg"],p["dst"],p["n"],p["e"],p["lat"],p["lon"],p["brg"],p["rng"]))
 
-    print()
-    print()
-    print(minN,0.0)
-    print(maxN,0.0)
-    print()
-    print(0.0,minE)
-    print(0.0,maxE)
-    print()
-    print()
-    for h in range(int(60*(minLon-pts[0]["lon"])),int(60*(maxLon-pts[0]["lon"])),int(60*(maxLon-minLon)/4)):
-        print(minN,h*cos(radians(pts[0]["lat"]+minN/60.0)))
-        print(maxN,h*cos(radians(pts[0]["lat"]+maxN/60.0)))
-        print()
-    for v in range(int(60*(minLat-pts[0]["lat"])),int(60*(maxLat-pts[0]["lat"])),int(60*(maxLat-minLat)/4)):
-        print(v,minE)
-        print(v,maxE)
-        print()
-
     # Epilogue
     if n<2:
         print("#SECTOR is not implementable (n=%d)" % (n))
     else:
-        print("#SECTOR has %d areas with %d legs and a planned travel distance of %.1f." % (n,2*n-1,l))
+        print("#SECTOR has %d areas with %d legs and a planned travel distance of %.1f NM." % (n,2*n-1,l))
     if n>24:
         print("#SECTOR is restricted in the operational code (areas=%d,legs=%d,coverage=%.1f%%)." % (24,2*24-1,2400.0/n))
 
